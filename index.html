@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="title">Centro Chiesa - La Bibbia per i Giovani</title>
+    <meta name="description" content="ParolaViva.net: la Bibbia spiegata ai bambini con parole semplici, omelie e percorsi educativi.">
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!-- Nuovi Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" aria-label="Home page">
+                    <img src="assets/img/logo.png" alt="Logo ParolaViva.net">
+                    <span class="logo-text">Centro Chiesa</span>
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="#home" data-lang-key="nav_home">Home</a></li>
+                    <li id="bible-menu-container"></li>
+                    <li><a href="chiesa.html" data-lang-key="nav_church">Chiesa</a></li>
+                    <li><a href="catechismo.html" data-lang-key="nav_catechism">Catechismo</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <button id="lang-it" onclick="setLanguage('it')" class="control-btn" aria-label="Italiano">IT</button>
+                <button id="lang-en" onclick="setLanguage('en')" class="control-btn" aria-label="Inglese">EN</button>
+                <button id="theme-toggle" class="control-btn" aria-label="Cambia tema"></button>
+                <button class="menu-toggle" aria-label="Apri/chiudi menu">
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- SEZIONE HERO -->
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 data-lang-key="hero_title">La Bibbia, chiara e vicina.</h1>
+                    <p class="subtitle" data-lang-key="hero_subtitle">ParolaViva ti aiuta a leggere i capitoli, capirne il messaggio e ritrovare parole utili per la vita di ogni giorno.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VERSETTO DEL GIORNO -->
+        <section id="verse" class="section">
+            <div class="container">
+                <div class="verse-of-the-day">
+                    <p class="verse-text" data-lang-key="verse_text">"Poiché dove due o tre sono riuniti nel mio nome, lì sono io in mezzo a loro."</p>
+                    <p class="verse-reference" data-lang-key="verse_reference">Matteo 18:20</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE PERCHÉ PER GIOVANI -->
+        <section id="perche-giovani" class="section section-highlight">
+            <div class="container">
+                <div class="split-layout">
+                    <div class="split-content">
+                        <h2 data-lang-key="why_youth_title">Perché per i Giovani?</h2>
+                        <p data-lang-key="why_youth_text">I giovani hanno un cuore aperto, curioso e pronto a meravigliarsi. Proporre la Bibbia in modo semplice e coinvolgente permette loro di capire che questi insegnamenti non sono solo storie antiche, ma parole vive che possono accompagnarli ogni giorno, offrendo risposte alle grandi domande della vita.</p>
+                    </div>
+                    <div class="split-image"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES ALTERNATE -->
+        <section id="features" class="section">
+            <div class="container">
+                <div class="feature-list-item">
+                    <div class="feature-content">
+                        <span class="feature-icon">01</span>
+                        <h3 data-lang-key="card1_title">Leggi con ordine</h3>
+                        <p data-lang-key="card1_text">Scegli un libro e arriva subito al capitolo che ti interessa, senza confusione.</p>
+                    </div>
+                </div>
+                <div class="feature-list-item">
+                    <div class="feature-content">
+                        <span class="feature-icon">02</span>
+                        <h3 data-lang-key="card2_title">Capisci il messaggio</h3>
+                        <p data-lang-key="card2_text">Ogni commento spiega il senso del testo con parole semplici e concrete.</p>
+                    </div>
+                </div>
+                <div class="feature-list-item">
+                    <div class="feature-content">
+                        <span class="feature-icon">03</span>
+                        <h3 data-lang-key="card3_title">Portalo nella vita</h3>
+                        <p data-lang-key="card3_text">Trova idee e valori da applicare nelle scelte, nelle relazioni e nella crescita personale.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALL TO ACTION -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 data-lang-key="cta_title">Inizia da un capitolo</h2>
+                <p data-lang-key="cta_subtitle">Apri il menu della Bibbia, scegli il libro e lasciati guidare passo dopo passo.</p>
+            </div>
+        </section>
+
+        <!-- SEZIONE CONTATTI -->
+        <section id="contatti" class="section">
+            <div class="container">
+                <div class="contact-wrapper">
+                    <h2 data-lang-key="contact_title">Scrivici</h2>
+                    <p data-lang-key="contact_subtitle">Per domande, suggerimenti o riflessioni, puoi contattarci qui.</p>
+                    <div class="contact-links">
+                        <a href="mailto:tommyaro007@gmail.com" class="contact-link">tommyaro007@gmail.com</a>
+                        <a href="https://www.instagram.com/_parolaviva_" target="_blank" class="contact-link" aria-label="Instagram" data-lang-key="contact_follow">Instagram</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <p data-lang-key="footer_text">&copy; 2025 Tommaso Arosio - Centro Chiesa</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/bible-menu.js"></script>
+    <script src="assets/js/lang.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+</html>
