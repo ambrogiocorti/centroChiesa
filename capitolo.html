@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Il titolo verrà impostato da JavaScript -->
+    <title>Caricamento... - ParolaViva.net</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!-- Nuovi Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" aria-label="Home page">
+                    <img src="assets/img/logo.png" alt="Logo ParolaViva.net">
+                    <span class="logo-text">ParolaViva</span>
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang-key="nav_home">Home</a></li>
+                    <li id="bible-menu-container"></li>
+                    <li><a href="chiesa.html" data-lang-key="nav_church">Chiesa</a></li>
+                    <li><a href="catechismo.html" data-lang-key="nav_catechism">Catechismo</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <button id="lang-it" onclick="setLanguage('it')" class="control-btn" aria-label="Italiano">IT</button>
+                <button id="lang-en" onclick="setLanguage('en')" class="control-btn" aria-label="Inglese">EN</button>
+                <button id="theme-toggle" class="control-btn" aria-label="Cambia tema"></button>
+                <button class="menu-toggle" aria-label="Apri/chiudi menu">
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <article id="chapter-content">
+                <!-- Il titolo e il testo del capitolo verranno inseriti qui -->
+                <header class="chapter-header">
+                    <h1 id="chapter-title">Caricamento...</h1>
+                </header>
+                <div id="chapter-text" class="chapter-body">
+                    <p>Attendere prego, stiamo recuperando il testo del capitolo.</p>
+                </div>
+
+                <!-- Sezione per i commenti -->
+                <aside id="commentary-section" class="commentary">
+                    <h2 data-lang-key="commentary_title">Il commento per i giovani</h2>
+                    <div id="commentary-text">
+                        <p data-lang-key="commentary_loading">Commento non ancora disponibile.</p>
+                    </div>
+                </aside>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-lang-key="footer_text">&copy; 2025 Tommaso Arosio - ParolaViva</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/bible-menu.js"></script>
+    <script src="assets/js/chapter-loader.js"></script>
+    <script src="assets/js/lang.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+</html>

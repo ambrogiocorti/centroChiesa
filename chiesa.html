@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struttura della Chiesa - Centro Chiesa</title>
+    <meta name="description" content="Guida alla struttura della Chiesa: persone, luoghi, ruoli, paramenti, storia e organizzazione cattolica.">
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" aria-label="Home page">
+                    <img src="assets/img/logo.png" alt="Logo ParolaViva.net">
+                    <span class="logo-text">Centro Chiesa</span>
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang-key="nav_home">Home</a></li>
+                    <li id="bible-menu-container"></li>
+                    <li><a href="chiesa.html" class="active" data-lang-key="nav_church">Chiesa</a></li>
+                    <li><a href="catechismo.html" data-lang-key="nav_catechism">Catechismo</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <button id="lang-it" onclick="setLanguage('it')" class="control-btn" aria-label="Italiano">IT</button>
+                <button id="lang-en" onclick="setLanguage('en')" class="control-btn" aria-label="Inglese">EN</button>
+                <button id="theme-toggle" class="control-btn" aria-label="Cambia tema"></button>
+                <button class="menu-toggle" aria-label="Apri/chiudi menu">
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="church-page">
+        <section class="church-hero">
+            <div class="container">
+                <div class="church-hero-content">
+                    <p class="eyebrow">Guida alla Chiesa cattolica</p>
+                    <h1>Struttura della Chiesa</h1>
+                    <p>Una mappa ordinata per capire persone, luoghi, ruoli, paramenti, storia e vita concreta della Chiesa.</p>
+                    <div class="church-hero-actions" aria-label="Sezioni principali">
+                        <a href="#mappa">Mappa</a>
+                        <a href="#capire">Capire la Chiesa</a>
+                        <a href="#glossario">Glossario</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mappa" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Modello di consultazione</p>
+                    <h2>Mappa generale</h2>
+                    <p>Una struttura ispirata al modo ordinato di consultare GCatholic: prima le persone, poi i luoghi, poi documenti ed eventi.</p>
+                </div>
+
+                <div class="directory-grid">
+                    <article class="directory-column">
+                        <div class="directory-header">
+                            <span>01</span>
+                            <h3>Persone</h3>
+                        </div>
+
+                        <div class="directory-group">
+                            <h4>Gerarchia</h4>
+                            <div class="directory-links">
+                                <a href="dettaglio-chiesa.html?id=pope">Papi</a>
+                                <a href="dettaglio-chiesa.html?id=cardinals">Cardinali</a>
+                                <a href="dettaglio-chiesa.html?id=patriarchs">Patriarchi</a>
+                                <a href="dettaglio-chiesa.html?id=majorarchbishops">Arcivescovi maggiori</a>
+                                <a href="dettaglio-chiesa.html?id=prelates">Arcivescovi e vescovi</a>
+                                <a href="dettaglio-chiesa.html?id=mottos">Motti episcopali</a>
+                            </div>
+                        </div>
+
+                        <div class="directory-group">
+                            <h4>Santi e liturgia</h4>
+                            <div class="directory-links">
+                                <a href="dettaglio-chiesa.html?id=saints">Santi</a>
+                                <a href="dettaglio-chiesa.html?id=beati">Beati</a>
+                                <a href="dettaglio-chiesa.html?id=doctors">Dottori della Chiesa</a>
+                                <a href="dettaglio-chiesa.html?id=calendar">Calendario liturgico</a>
+                                <a href="dettaglio-chiesa.html?id=martyrology">Martirologio romano</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="directory-column">
+                        <div class="directory-header">
+                            <span>02</span>
+                            <h3>Luoghi</h3>
+                        </div>
+
+                        <div class="directory-group">
+                            <h4>Territori ecclesiali</h4>
+                            <div class="directory-links">
+                                <a href="dettaglio-chiesa.html?id=countries">Paesi</a>
+                                <a href="dettaglio-chiesa.html?id=statistics">Statistiche</a>
+                                <a href="dettaglio-chiesa.html?id=dioceses-continents">Diocesi per continente</a>
+                                <a href="dettaglio-chiesa.html?id=dioceses-names">Diocesi per nome</a>
+                                <a href="dettaglio-chiesa.html?id=dioceses-types">Diocesi per tipo</a>
+                                <a href="dettaglio-chiesa.html?id=dioceses-rites">Diocesi per rito</a>
+                                <a href="dettaglio-chiesa.html?id=vacant-sees">Sedi vacanti</a>
+                                <a href="dettaglio-chiesa.html?id=titular-sees">Sedi titolari</a>
+                            </div>
+                        </div>
+
+                        <div class="directory-group">
+                            <h4>Chiese e istituzioni</h4>
+                            <div class="directory-links">
+                                <a href="dettaglio-chiesa.html?id=cathedrals">Cattedrali</a>
+                                <a href="dettaglio-chiesa.html?id=basilicas">Basiliche</a>
+                                <a href="dettaglio-chiesa.html?id=national-shrines">Santuari nazionali</a>
+                                <a href="dettaglio-chiesa.html?id=world-heritage">Chiese patrimonio mondiale</a>
+                                <a href="dettaglio-chiesa.html?id=rome">Roma</a>
+                                <a href="dettaglio-chiesa.html?id=curia">Curia romana</a>
+                                <a href="dettaglio-chiesa.html?id=organizations">Organizzazioni</a>
+                                <a href="dettaglio-chiesa.html?id=religious-orders">Ordini religiosi</a>
+                                <a href="dettaglio-chiesa.html?id=bishops-conferences">Conferenze episcopali</a>
+                                <a href="dettaglio-chiesa.html?id=nunciatures">Nunziature apostoliche</a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="directory-column">
+                        <div class="directory-header">
+                            <span>03</span>
+                            <h3>Cose</h3>
+                        </div>
+
+                        <div class="directory-group">
+                            <h4>Documenti</h4>
+                            <div class="directory-links">
+                                <a href="dettaglio-chiesa.html?id=documents">Documenti della Chiesa</a>
+                            </div>
+                        </div>
+
+                        <div class="directory-group">
+                            <h4>Eventi</h4>
+                            <div class="directory-links">
+                                <a href="dettaglio-chiesa.html?id=recent-appointments">Nomine recenti</a>
+                                <a href="dettaglio-chiesa.html?id=papal-audiences">Udienze papali</a>
+                                <a href="dettaglio-chiesa.html?id=necrology">Necrologio</a>
+                                <a href="dettaglio-chiesa.html?id=diocese-changes">Cambiamenti delle diocesi</a>
+                                <a href="dettaglio-chiesa.html?id=celebrations">Celebrazioni</a>
+                                <a href="dettaglio-chiesa.html?id=commemorations">Commemorazioni</a>
+                                <a href="dettaglio-chiesa.html?id=conclaves">Conclavi</a>
+                                <a href="dettaglio-chiesa.html?id=sede-vacante">Sede vacante</a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="capire" class="section section-highlight">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Spiegazione semplice</p>
+                    <h2>Capire la Chiesa</h2>
+                    <p>Una parte pensata per studiare la Chiesa non solo come elenco, ma come realtà viva: organizzazione, ruoli, liturgia e storia.</p>
+                </div>
+
+                <div class="learning-grid">
+                    <article class="learning-card">
+                        <span class="learning-number">01</span>
+                        <h3>Organizzazione</h3>
+                        <p>La Chiesa universale è guidata dal Papa, vescovo di Roma. Le diocesi sono affidate ai vescovi; le parrocchie sono comunità locali affidate ai parroci.</p>
+                        <ul>
+                            <li>Santa Sede e Curia romana</li>
+                            <li>Diocesi, arcidiocesi, parrocchie</li>
+                            <li>Conferenze episcopali e nunziature</li>
+                            <li>Ordini religiosi e movimenti ecclesiali</li>
+                        </ul>
+                    </article>
+
+                    <article class="learning-card">
+                        <span class="learning-number">02</span>
+                        <h3>Ruoli</h3>
+                        <p>Ogni ruolo serve alla comunione e alla missione: annunciare il Vangelo, celebrare i sacramenti, guidare e custodire il popolo di Dio.</p>
+                        <ul>
+                            <li>Papa, cardinali, patriarchi</li>
+                            <li>Vescovi, presbiteri, diaconi</li>
+                            <li>Religiosi, consacrate e consacrati</li>
+                            <li>Laici, catechisti, educatori e volontari</li>
+                        </ul>
+                    </article>
+
+                    <article class="learning-card">
+                        <span class="learning-number">03</span>
+                        <h3>Paramenti</h3>
+                        <p>I paramenti aiutano a riconoscere il tempo liturgico, il ministero di chi celebra e il significato della celebrazione.</p>
+                        <ul>
+                            <li>Alba, amitto, cingolo e stola</li>
+                            <li>Casula per la Messa, dalmatica per il diacono</li>
+                            <li>Mitra, pastorale e anello per il vescovo</li>
+                            <li>Colori: bianco, rosso, verde, viola, rosa</li>
+                        </ul>
+                    </article>
+
+                    <article class="learning-card">
+                        <span class="learning-number">04</span>
+                        <h3>Sacramenti e passaggi</h3>
+                        <p>La vita cristiana è accompagnata da segni concreti: nascita alla fede, crescita, vocazione, perdono, servizio e cura nella malattia.</p>
+                        <ul>
+                            <li>Battesimo, Eucaristia, Confermazione</li>
+                            <li>Riconciliazione e Unzione degli infermi</li>
+                            <li>Matrimonio e Ordine sacro</li>
+                            <li>Funerali, benedizioni e tempi liturgici</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="church-split">
+                    <div>
+                        <p class="eyebrow">Gerarchia essenziale</p>
+                        <h2>Dal Papa alla parrocchia</h2>
+                        <p>La struttura cattolica non è solo amministrazione: serve a mantenere la fede comune e a rendere possibile una presenza concreta nei territori.</p>
+                    </div>
+
+                    <div class="role-ladder" aria-label="Schema dei ruoli nella Chiesa">
+                        <div><span>Papa</span><p>Unità della Chiesa universale</p></div>
+                        <div><span>Vescovo</span><p>Guida di una diocesi</p></div>
+                        <div><span>Presbitero</span><p>Servizio pastorale e sacramenti</p></div>
+                        <div><span>Diacono</span><p>Carità, Parola e liturgia</p></div>
+                        <div><span>Laici</span><p>Testimonianza cristiana nel mondo</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-highlight">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Storia</p>
+                    <h2>Linea del tempo essenziale</h2>
+                    <p>Una sintesi per orientarsi nei grandi passaggi della storia della Chiesa.</p>
+                </div>
+
+                <div class="timeline">
+                    <article>
+                        <span>I secolo</span>
+                        <h3>Chiesa apostolica</h3>
+                        <p>Le prime comunità cristiane nascono dall'annuncio degli apostoli e dalla testimonianza della risurrezione.</p>
+                    </article>
+                    <article>
+                        <span>IV-V secolo</span>
+                        <h3>Concili antichi</h3>
+                        <p>La Chiesa chiarisce la fede su Cristo e sulla Trinità, definendo il linguaggio fondamentale del Credo.</p>
+                    </article>
+                    <article>
+                        <span>Medioevo</span>
+                        <h3>Monachesimo e missione</h3>
+                        <p>Monasteri, cattedrali, università e missioni segnano profondamente la cultura europea.</p>
+                    </article>
+                    <article>
+                        <span>XVI secolo</span>
+                        <h3>Riforma e Trento</h3>
+                        <p>La Chiesa affronta divisioni e rinnovamento, precisando dottrina, liturgia e formazione del clero.</p>
+                    </article>
+                    <article>
+                        <span>XX secolo</span>
+                        <h3>Concilio Vaticano II</h3>
+                        <p>Un grande momento di rinnovamento pastorale: liturgia, Scrittura, dialogo e missione nel mondo contemporaneo.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="glossario" class="section">
+            <div class="container">
+                <div class="section-heading">
+                    <p class="eyebrow">Parole chiave</p>
+                    <h2>Glossario rapido</h2>
+                </div>
+
+                <div class="glossary-grid">
+                    <article><h3>Diocesi</h3><p>Porzione del popolo di Dio affidata a un vescovo.</p></article>
+                    <article><h3>Arcidiocesi</h3><p>Diocesi con particolare importanza storica o pastorale, guidata da un arcivescovo.</p></article>
+                    <article><h3>Parrocchia</h3><p>Comunità locale affidata normalmente a un parroco.</p></article>
+                    <article><h3>Rito</h3><p>Tradizione liturgica, teologica e disciplinare con cui una Chiesa celebra la fede.</p></article>
+                    <article><h3>Sede vacante</h3><p>Periodo in cui una sede episcopale, o la Sede Apostolica, non ha ancora un titolare.</p></article>
+                    <article><h3>Curia romana</h3><p>Organismi che aiutano il Papa nel governo della Chiesa universale.</p></article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-lang-key="footer_text">&copy; 2025 Tommaso Arosio - Centro Chiesa</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/bible-menu.js"></script>
+    <script src="assets/js/lang.js"></script>
+    <script src="assets/js/theme.js"></script>
+</body>
+</html>
