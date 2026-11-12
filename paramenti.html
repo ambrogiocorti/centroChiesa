@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramenti - Centro Chiesa</title>
+    <meta name="description" content="Colori liturgici e paramenti: scegli il rito, scegli il colore e scopri i paramenti con spiegazioni in popup." />
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html" aria-label="Home page">
+                <img src="assets/img/logo.png" alt="Logo ParolaViva.net">
+                    <span class="logo-text">Centro Chiesa</span>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html" data-lang-key="nav_home">Home</a></li>
+                <li id="bible-menu-container"></li>
+                <li><a href="chiesa.html" data-lang-key="nav_church">Chiesa</a></li>
+                <li><a href="catechismo.html" data-lang-key="nav_catechism">Catechismo</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-controls">
+            <button id="lang-it" onclick="setLanguage('it')" class="control-btn" aria-label="Italiano">IT</button>
+            <button id="lang-en" onclick="setLanguage('en')" class="control-btn" aria-label="Inglese">EN</button>
+            <button id="theme-toggle" class="control-btn" aria-label="Cambia tema"></button>
+            <button class="menu-toggle" aria-label="Apri/chiudi menu">
+                <span class="menu-icon-line"></span>
+                <span class="menu-icon-line"></span>
+                <span class="menu-icon-line"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="section" style="padding-top:96px;">
+        <div class="container">
+            <div class="section-heading" style="max-width:860px;">
+                <p class="eyebrow">Colori liturgici & paramenti</p>
+                <h2 data-lang-key="vestments_title">Scopri i paramenti</h2>
+                <p data-lang-key="vestments_subtitle">Seleziona il rito, scegli il colore e apri i dettagli dei paramenti con un popup.</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr); gap: 2rem; align-items:start;">
+                <div>
+                    <div style="padding:1.25rem; background:var(--surface-color); border:1px solid var(--border-color); border-radius:var(--border-radius); box-shadow: var(--shadow-card);">
+                        <h3 style="margin-bottom: 0.75rem;">1) Rito</h3>
+                        <div style="display:grid; gap:0.6rem;">
+                            <label style="display:flex; gap:0.6rem; align-items:center; font-weight:700; color:var(--text-secondary-color);">
+                                <span>📜</span>
+                                <select id="ritual-select" style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-secondary-color); color: var(--text-color); font-weight:800;">
+                                    <option value="roman">Rito romano (post-Vaticano II)</option>
+                                    <option value="roman-tridentine">Rito romano antico (1962)</option>
+                                    <option value="ambrosian">Rito ambrosiano</option>
+                                    <option value="byzantine">Rito bizantino (colori variabili)</option>
+                                    <option value="anglican">Anglicanesimo</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div style="height: 14px;"></div>
+
+                    <div style="padding:1.25rem; background:var(--surface-color); border:1px solid var(--border-color); border-radius:var(--border-radius); box-shadow: var(--shadow-card);">
+                        <h3 style="margin-bottom: 0.75rem;">2) Colore</h3>
+                        <div id="colors-grid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 0.75rem;">
+                            <!-- filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div style="padding:1.25rem; background:var(--bg-secondary-color); border:1px solid var(--border-color); border-radius:var(--border-radius); box-shadow: var(--shadow-card);">
+                        <h3 style="margin-bottom: 0.75rem;">3) Paramenti (cielo/colore)</h3>
+                        <p id="selected-color-subtitle" style="margin-bottom:1rem; font-weight:800; color: var(--text-secondary-color);">Seleziona un colore per vedere i paramenti.</p>
+                        <div id="vestments-grid" style="display:grid; grid-template-columns: 1fr; gap: 0.75rem;">
+                            <!-- filled by JS -->
+                        </div>
+                        <p style="margin-top:1rem; font-size:0.92rem;">Nota: le “foto” dei paramenti sono segnaposto finché non caricheremo immagini reali.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Popup -->
+<div id="vestments-popup" hidden
+     style="position:fixed; inset:0; background: rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index: 2000; padding: 18px;">
+
+    <div style="width: min(780px, 100%); background: var(--surface-color); border:1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow-card); overflow:hidden;">
+        <div style="padding: 1rem 1.25rem; border-bottom: 1px solid var(--border-color); display:flex; align-items:flex-start; justify-content:space-between; gap:1rem;">
+            <div>
+                <div style="font-size:0.78rem; font-weight:900; letter-spacing:0.04em; text-transform:uppercase; color: var(--primary-color); margin-bottom: 0.35rem;" id="popup-tag">Paramento</div>
+                <h3 id="popup-title" style="margin:0;">Titolo</h3>
+                <p id="popup-color" style="margin:0.35rem 0 0; color: var(--text-secondary-color); font-weight:800;"></p>
+            </div>
+            <button id="popup-close" class="control-btn" style="width:40px; height:40px; border-radius:12px;" aria-label="Chiudi popup">✕</button>
+        </div>
+
+        <div style="padding: 1.25rem; display:grid; grid-template-columns: 220px minmax(0,1fr); gap: 1.25rem; align-items:start;">
+            <div style="background: var(--bg-secondary-color); border:1px solid var(--border-color); border-radius: 10px; padding: 0.8rem;">
+                <img id="popup-image" alt="Immagine paramento" style="width:100%; height:auto; border-radius:8px;" src="assets/img/placeholder.png" onerror="this.src='assets/img/placeholder.png'" />
+            </div>
+            <div>
+                <p id="popup-description" style="margin-bottom: 1rem; font-size:1.04rem;">Descrizione...</p>
+                <div style="display:grid; gap:0.6rem;">
+                    <h4 style="margin:0; color: var(--primary-color); font-size: 1rem; font-family: var(--font-body);">Quando si usa</h4>
+                    <div id="popup-uses" style="color: var(--text-secondary-color); line-height: 1.8;">...</div>
+                </div>
+            </div>
+        </div>
+
+        <div style="padding: 0.9rem 1.25rem; border-top: 1px solid var(--border-color); background: var(--bg-secondary-color); display:flex; justify-content:flex-end;">
+            <button id="popup-ok" class="contact-link" style="min-height: 40px;">OK</button>
+        </div>
+    </div>
+</div>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/bible-menu.js"></script>
+<script src="assets/js/lang.js"></script>
+<script src="assets/js/theme.js"></script>
+
+<script>
+// Data base minimal (da arricchire con contenuti completi)
+const VESTMENT_DB = {
+  "roman": {
+    name_it: "Rito romano (post-Vaticano II)",
+    name_en: "Roman rite (post-Vatican II)",
+    colors: [
+      { key: "green", label_it: "Verde", label_en: "Green", hex: "#1f8a3b", description_it: "Tempo ordinario", description_en: "Ordinary Time" },
+      { key: "violet", label_it: "Viola", label_en: "Violet", hex: "#6a3dc8", description_it: "Avvento e Quaresima; penitenza", description_en: "Advent and Lent; penance" },
+      { key: "rose", label_it: "Rosa", label_en: "Rose", hex: "#f08db1", description_it: "Gaudete e Laetare (tradizione)", description_en: "Gaudete and Laetare (tradition)" },
+      { key: "white", label_it: "Bianco", label_en: "White", hex: "#ffffff", description_it: "Natale, Pasqua e molte solennità", description_en: "Christmas, Easter and many feasts" },
+      { key: "red", label_it: "Rosso", label_en: "Red", hex: "#d11f2a", description_it: "Pentecoste, martiri, Spirito Santo", description_en: "Pentecost, martyrs, Holy Spirit" },
+      { key: "gold", label_it: "Dorato", label_en: "Gold", hex: "#d4b24d", description_it: "Per occasioni molto solenni", description_en: "For very solemn days" },
+      { key: "black", label_it: "Nero", label_en: "Black", hex: "#1b1b1b", description_it: "Requiem e uffici dei defunti (dove in uso)", description_en: "Requiems and offices for the dead (where used)" }
+    ],
+    vestmentsByColor: {
+      green: ["Alba","Cingolo","Stola"],
+      violet: ["Alba","Amito","Stola"],
+      rose: ["Alba","Casula","Stola"],
+      white: ["Alba","Casula","Mitra (vescovo)"],
+      red: ["Alba","Casula","Dalmatica (diacono)"],
+      gold: ["Casula","Stola","Mitra (vescovo)"],
+      black: ["Alba","Casula"]
+    },
+    vestmentsMeta: {
+      "Alba": {
+        description_it: "L’alba è una veste lunga usata da ministri ordinati e talvolta anche da altri ministri istituiti: simbolo della dignità battesimale.",
+        description_en: "The alb is a long garment worn by ordained ministers and sometimes by other instituted ministers: it symbolizes baptismal dignity.",
+        uses_it: "Quasi sempre in celebrazioni liturgiche come veste di base.",
+        uses_en: "Used in most liturgical celebrations as a basic vestment."
+      },
+      "Amito": {
+        description_it: "L’amitto è un pannello di tessuto piegato che si indossa sopra il camice, collegato alla preparazione della veste sacra.",
+        description_en: "The amice is a folded cloth worn over the alb, connected to the preparation of the sacred garment.",
+        uses_it: "In preparazione e vestizione; tipicamente nella Messa e in altri riti.",
+        uses_en: "In the vesting rite; typically in Mass and other ceremonies."
+      },
+      "Cingolo": {
+        description_it: "Il cingolo (cordone) raccoglie l’alba e richiama l’idea di essere pronti a servire con slancio.",
+        description_en: "The cincture gathers the alb and evokes readiness to serve with energy.",
+        uses_it: "Come parte della vestizione dell’abito.",
+        uses_en: "As part of vesting."
+      },
+      "Stola": {
+        description_it: "La stola è la veste propria del sacerdote e del diacono: segno del ministero e della comunione con la Chiesa.",
+        description_en: "The stole is proper to priest and deacon: a sign of ministry and communion with the Church.",
+        uses_it: "Indossata dal sacerdote e dal diacono durante le celebrazioni.",
+        uses_en: "Worn by priest and deacon during celebrations."
+      },
+      "Casula": {
+        description_it: "La casula è la veste principale del celebrante della Messa: indica l’amore che ‘avvolge’ la missione.",
+        description_en: "The chasuble is the main Mass vestment: it symbolizes charity that ‘envelops’ the ministry.",
+        uses_it: "Per il sacerdote che presiede la Messa e nelle celebrazioni analoghe.",
+        uses_en: "For the presiding priest at Mass and similar celebrations."
+      },
+      "Dalmatica (diacono)": {
+        description_it: "La dalmatica è la veste propria del diacono: segno del servizio nella liturgia e della proclamazione.",
+        description_en: "The dalmatic is proper to the deacon: a sign of liturgical service and proclamation.",
+        uses_it: "Per il diacono durante la Messa.",
+        uses_en: "For the deacon during Mass."
+      },
+      "Mitra (vescovo)": {
+        description_it: "La mitra è il copricapo del vescovo: richiama la guida pastorale e l’autorità nella comunione.",
+        description_en: "The mitre is the bishop’s headgear: it recalls pastoral leadership and authority in communion.",
+        uses_it: "Per il vescovo nelle celebrazioni in cui presiede (secondo le rubriche).",
+        uses_en: "For the bishop when presiding (according to rubrics)."
+      }
+    }
+  },
+};
+
+const getCurrentLang = () => localStorage.getItem('language') || 'it';
+
+const ritualSelect = document.getElementById('ritual-select');
+const colorsGrid = document.getElementById('colors-grid');
+const vestmentsGrid = document.getElementById('vestments-grid');
+const selectedColorSubtitle = document.getElementById('selected-color-subtitle');
+
+function safeText(t){ return t == null ? '' : String(t); }
+
+function setPopupContent({title, colorLabel, description, uses}){
+  document.getElementById('popup-title').textContent = title;
+  document.getElementById('popup-color').textContent = colorLabel;
+  document.getElementById('popup-description').textContent = description;
+  document.getElementById('popup-uses').textContent = uses;
+}
+
+function openPopup(){
+  const popup = document.getElementById('vestments-popup');
+  popup.hidden = false;
+}
+function closePopup(){
+  const popup = document.getElementById('vestments-popup');
+  popup.hidden = true;
+}
+
+const popupClose = document.getElementById('popup-close');
+const popupOk = document.getElementById('popup-ok');
+popupClose?.addEventListener('click', closePopup);
+popupOk?.addEventListener('click', closePopup);
+
+document.getElementById('vestments-popup')?.addEventListener('click', (e)=>{
+  if(e.target?.id === 'vestments-popup') closePopup();
+});
+
+function renderColors(ritualKey){
+  const lang = getCurrentLang();
+  const ritual = VESTMENT_DB[ritualKey];
+  if(!ritual) return;
+
+  colorsGrid.innerHTML = '';
+
+  ritual.colors.forEach(color => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.style = `
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 10px;
+      background: var(--surface-color);
+      cursor:pointer;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap: 8px;
+      box-shadow: none;
+    `;
+
+    const swatch = document.createElement('div');
+    swatch.style = `width:44px; height:44px; border-radius: 12px; background:${color.hex}; border: 1px solid rgba(0,0,0,0.12);`;
+
+    const label = document.createElement('div');
+    label.style = 'font-weight:900; color: var(--text-color); font-size:0.95rem; text-align:center;';
+    label.textContent = lang === 'en' ? color.label_en : color.label_it;
+
+    const q = document.createElement('div');
+    q.textContent = ' ? ';
+    q.style = 'font-weight:900; color: var(--primary-color);';
+    q.setAttribute('aria-hidden','true');
+
+    btn.append(swatch, label, q);
+    btn.addEventListener('click', ()=>{
+      renderVestmentsForColor(ritualKey, color.key);
+    });
+
+    colorsGrid.appendChild(btn);
+  });
+}
+
+function renderVestmentsForColor(ritualKey, colorKey){
+  const lang = getCurrentLang();
+  const ritual = VESTMENT_DB[ritualKey];
+  if(!ritual) return;
+
+  const color = ritual.colors.find(c=>c.key===colorKey);
+  selectedColorSubtitle.textContent = (lang === 'en' ? color.label_en : color.label_it) + ' — ' + (lang === 'en' ? color.description_en : color.description_it);
+
+  vestmentsGrid.innerHTML = '';
+  const items = ritual.vestmentsByColor[colorKey] || [];
+
+  items.forEach(itemName => {
+    const meta = ritual.vestmentsMeta[itemName] || { description_it:'', description_en:'', uses_it:'', uses_en:'' };
+
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.style = `
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      background: var(--surface-color);
+      padding: 0;
+      cursor:pointer;
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: 72px 1fr;
+      align-items:center;
+      gap: 12px;
+      padding: 10px;
+      text-align:left;
+    `;
+
+    const imgWrap = document.createElement('div');
+    imgWrap.style = 'width:72px; height:72px; border-radius: 12px; background: var(--bg-secondary-color); border:1px solid var(--border-color); display:flex; align-items:center; justify-content:center; overflow:hidden;';
+
+    const img = document.createElement('img');
+    img.alt = itemName;
+    img.style = 'width:100%; height:100%; object-fit:cover;';
+    img.src = 'assets/img/placeholder.png';
+
+    imgWrap.appendChild(img);
+
+    const text = document.createElement('div');
+    text.innerHTML = `
+      <div style="font-weight:900; color: var(--text-color); margin-bottom: 0.2rem;">${safeText(itemName)}</div>
+      <div style="color: var(--text-secondary-color); font-size:0.92rem; font-weight:800;">${lang === 'en' ? 'Open details' : 'Apri dettagli'}</div>
+    `;
+
+    card.append(imgWrap, text);
+
+    card.addEventListener('click', ()=>{
+      setPopupContent({
+        title: safeText(itemName),
+        colorLabel: lang === 'en' ? color.label_en : color.label_it,
+        description: lang === 'en' ? meta.description_en : meta.description_it,
+        uses: lang === 'en' ? meta.uses_en : meta.uses_it
+      });
+      openPopup();
+    });
+
+    vestmentsGrid.appendChild(card);
+  });
+}
+
+function init(){
+  const ritualKey = ritualSelect.value || 'roman';
+  renderColors(ritualKey);
+  renderVestmentsForColor(ritualKey, (VESTMENT_DB[ritualKey]?.colors?.[0]?.key) || 'white');
+}
+
+ritualSelect.addEventListener('change', ()=>{
+  renderColors(ritualSelect.value);
+  const first = VESTMENT_DB[ritualSelect.value]?.colors?.[0]?.key;
+  if(first) renderVestmentsForColor(ritualSelect.value, first);
+});
+
+init();
+</script>
+</body>
+</html>
+

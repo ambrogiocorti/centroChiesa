@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-lang-key="catechism_title">Catechismo - ParolaViva.net</title>
+    <meta name="description" content="I percorsi educativi di catechismo divisi per anni su ParolaViva.net.">
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .catechism-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            margin-top: 40px;
+            margin-bottom: 60px;
+            align-items: start;
+        }
+        
+        .years-sidebar {
+            display: grid;
+            gap: 0.75rem;
+            background: var(--bg-secondary-color);
+            padding: 1.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+        }
+        
+        .year-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0.9rem 1.2rem;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        
+        .year-btn:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-soft-color);
+        }
+        
+        .year-btn.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .year-btn.active span:first-child {
+            color: #ffffff;
+        }
+        
+        .year-btn.active span:last-child {
+            color: rgba(255, 255, 255, 0.85);
+        }
+        
+        .year-btn span:first-child {
+            font-family: var(--font-heading);
+            font-size: 1.12rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 4px;
+        }
+        
+        .year-btn span:last-child {
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .lessons-content {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+        }
+        
+        .lessons-header {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .lessons-header h2 {
+            margin-bottom: 6px;
+        }
+        
+        .lessons-list {
+            display: grid;
+            gap: 1.25rem;
+        }
+        
+        .lesson-card {
+            background: var(--bg-secondary-color);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            padding: 1.25rem;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+        
+        .lesson-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary-color);
+        }
+        
+        .lesson-card h3 {
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+        
+        .lesson-card p {
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .read-lesson-btn {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--primary-color);
+            border-bottom: 1.5px solid transparent;
+            padding-bottom: 2px;
+        }
+        
+        .read-lesson-btn:hover {
+            color: var(--primary-hover-color);
+            border-color: var(--primary-hover-color);
+        }
+        
+        @media (max-width: 992px) {
+            .catechism-layout {
+                grid-template-columns: 1fr;
+            }
+            .years-sidebar {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            }
+        }
+        
+        @media (max-width: 640px) {
+            .years-sidebar {
+                grid-template-columns: 1fr;
+            }
+            .lessons-content {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html" aria-label="Home page">
+                    <img src="assets/img/logo.png" alt="Logo ParolaViva.net">
+                    <span class="logo-text">ParolaViva</span>
+                </a>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="index.html" data-lang-key="nav_home">Home</a></li>
+                    <li id="bible-menu-container"></li>
+                    <li><a href="chiesa.html" data-lang-key="nav_church">Chiesa</a></li>
+                    <li><a href="catechismo.html" class="active" data-lang-key="nav_catechism">Catechismo</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <button id="lang-it" onclick="setLanguage('it')" class="control-btn" aria-label="Italiano">IT</button>
+                <button id="lang-en" onclick="setLanguage('en')" class="control-btn" aria-label="Inglese">EN</button>
+                <button id="theme-toggle" class="control-btn" aria-label="Cambia tema"></button>
+                <button class="menu-toggle" aria-label="Apri/chiudi menu">
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                    <span class="menu-icon-line"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="church-page">
+        <!-- HERO -->
+        <section class="church-hero" style="background-image: linear-gradient(115deg, rgba(6, 42, 91, 0.92), rgba(15, 95, 214, 0.74)), url('https://images.unsplash.com/photo-1543002588-bfa74002ed7e?q=80&w=2070&auto=format&fit=crop');">
+            <div class="container">
+                <div class="church-hero-content">
+                    <p class="eyebrow" data-lang-key="catechism_eyebrow">Percorsi educativi</p>
+                    <h1 data-lang-key="catechism_hero_title">Catechismo</h1>
+                    <p data-lang-key="catechism_hero_subtitle">Cammini di fede divisi per anni, pensati per far crescere i bambini e i giovani insieme nell'amore di Gesù.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DASHBOARD CATECHISMO -->
+        <section class="section">
+            <div class="container">
+                <div class="catechism-layout">
+                    <!-- Sidebar Anni -->
+                    <aside class="years-sidebar" id="years-sidebar-container">
+                        <!-- Generato dinamicamente -->
+                    </aside>
+
+                    <!-- Elenco Lezioni -->
+                    <article class="lessons-content">
+                        <header class="lessons-header">
+                            <h2 id="current-year-title">Caricamento anni...</h2>
+                            <p id="current-year-desc"></p>
+                        </header>
+                        
+                        <div class="lessons-list" id="lessons-list-container">
+                            <!-- Generato dinamicamente -->
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-lang-key="footer_text">&copy; 2025 Tommaso Arosio - ParolaViva</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/bible-menu.js"></script>
+    <script src="assets/js/lang.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/catechismo-loader.js"></script>
+</body>
+</html>

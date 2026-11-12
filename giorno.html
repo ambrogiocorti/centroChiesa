@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giorno dell’anno - Centro Chiesa</title>
+    <meta name="description" content="Scegli una data e un rito: ti mostriamo colore liturgico, santi del giorno e letture (demo) per ogni rito selezionato." />
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header>
+    <div class="header-container">
+        <div class="logo">
+            <a href="index.html" aria-label="Home page">
+                <img src="assets/img/logo.png" alt="Logo ParolaViva.net">
+                    <span class="logo-text">Centro Chiesa</span>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="index.html" data-lang-key="nav_home">Home</a></li>
+                <li id="bible-menu-container"></li>
+                <li><a href="chiesa.html" data-lang-key="nav_church">Chiesa</a></li>
+                <li><a href="catechismo.html" data-lang-key="nav_catechism">Catechismo</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-controls">
+            <button id="lang-it" onclick="setLanguage('it')" class="control-btn" aria-label="Italiano">IT</button>
+            <button id="lang-en" onclick="setLanguage('en')" class="control-btn" aria-label="Inglese">EN</button>
+            <button id="theme-toggle" class="control-btn" aria-label="Cambia tema"></button>
+            <button class="menu-toggle" aria-label="Apri/chiudi menu">
+                <span class="menu-icon-line"></span>
+                <span class="menu-icon-line"></span>
+                <span class="menu-icon-line"></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section class="section" style="padding-top:96px;">
+        <div class="container">
+            <div class="section-heading" style="max-width:860px;">
+                <p class="eyebrow">Calendario del giorno</p>
+                <h2 data-lang-key="day_title">Cosa si celebra oggi</h2>
+                <p data-lang-key="day_subtitle">Seleziona una data e un rito: output per ciascun rito scelto (demo struttura).</p>
+            </div>
+
+            <div style="display:grid; grid-template-columns: minmax(0,1fr) minmax(320px,0.9fr); gap:2rem; align-items:start;">
+
+                <div style="padding:1.25rem; background:var(--surface-color); border:1px solid var(--border-color); border-radius:var(--border-radius); box-shadow: var(--shadow-card);">
+                    <h3 style="margin-bottom:0.85rem;">1) Parametri</h3>
+
+                    <div style="display:grid; gap:0.75rem;">
+                        <label style="font-weight:900; color:var(--text-secondary-color); display:flex; gap:0.6rem; align-items:center;">
+                            📅 Data
+                            <input id="date-input" type="date" style="width:100%; padding:0.65rem; border:1px solid var(--border-color); border-radius:8px; background:var(--bg-secondary-color); color:var(--text-color); font-weight:800;" />
+                        </label>
+
+                        <div style="border-top:1px solid var(--border-color); margin:0.2rem 0 0.2rem;"></div>
+
+                        <h4 style="margin-top:0; color: var(--primary-color);">Riti</h4>
+                        <div id="rite-checkboxes" style="display:grid; gap:0.55rem;">
+                            <!-- generated -->
+                        </div>
+
+                        <button id="btn-load" class="contact-link" style="justify-content:center; border:none; cursor:pointer;">Carica</button>
+                    </div>
+                </div>
+
+                <div>
+                    <div id="day-results" style="display:grid; gap:1rem;">
+                        <!-- generated -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</main>
+
+<script src="assets/js/main.js"></script>
+<script src="assets/js/bible-menu.js"></script>
+<script src="assets/js/lang.js"></script>
+<script src="assets/js/theme.js"></script>
+
+<script>
+const RITES = [
+  { key: 'roman', label_it:'Rito romano (post-Vaticano II)', label_en:'Roman rite (post-Vatican II)' },
+  { key: 'roman-tridentine', label_it:'Rito romano antico (1962)', label_en:'Roman rite (1962)' },
+  { key: 'ambrosian', label_it:'Rito ambrosiano', label_en:'Ambrosian rite' },
+  { key: 'byzantine', label_it:'Rito bizantino', label_en:'Byzantine rite (var.)' }
+];
+
+// DEMO: finché non inserisci un dataset liturgico completo, mostriamo struttura.
+// Le logiche “colore paramenti / santi / letture / vangelo” vanno collegate a un dataset reale.
+function getPseudoColorForDate(iso){
+  // deterministico: mappa giorno del mese → colore (demo)
+  const d = Number(iso.slice(-2));
+  const colors = ['verde','viola','bianco','rosso','rosa','nero','gold'];
+  return colors[d % colors.length];
+}
+
+function renderResultCard({ritoKey, dateIso, colorKey}){
+  const lang = localStorage.getItem('language') || 'it';
+  const rite = RITES.find(r=>r.key===ritoKey);
+
+  const colorLabel = {
+    verde: lang==='en'?'Green':'Verde',
+    viola: lang==='en'?'Violet':'Viola',
+    bianco: lang==='en'?'White':'Bianco',
+    rosso: lang==='en'?'Red':'Rosso',
+    rosa: lang==='en'?'Rose':'Rosa',
+    nero: lang==='en'?'Black':'Nero',
+    gold: lang==='en'?'Gold':'Dorato'
+  }[colorKey] || colorKey;
+
+  const section = document.createElement('section');
+  section.style.padding='1.25rem';
+  section.style.background='var(--surface-color)';
+  section.style.border='1px solid var(--border-color)';
+  section.style.borderRadius='var(--border-radius)';
+  section.style.boxShadow='var(--shadow-card)';
+
+  section.innerHTML = `
+    <h3 style="margin-bottom:0.75rem; color: var(--primary-color);">${lang==='en'?rite.label_en:rite.label_it}</h3>
+
+    <div style="display:grid; gap:0.7rem;">
+      <div>
+        <div style="font-weight:900; color: var(--text-secondary-color);">${lang==='en'?'Liturgical color':'Colore liturgico'}</div>
+        <div style="margin-top:0.2rem; font-weight:1000; font-size:1.15rem;">${colorLabel}</div>
+      </div>
+
+      <div style="border-top:1px solid var(--border-color); padding-top:0.75rem;">
+        <div style="font-weight:900; color: var(--text-secondary-color); margin-bottom:0.4rem;">${lang==='en'?'Saints of the day':'Santi del giorno'}</div>
+        <div style="color: var(--text-secondary-color);">(demo) Inserire qui i santi del giorno per ${dateIso} e per ${ritoKey}</div>
+      </div>
+
+      <div style="border-top:1px solid var(--border-color); padding-top:0.75rem;">
+        <div style="font-weight:900; color: var(--text-secondary-color); margin-bottom:0.4rem;">${lang==='en'?'Readings':'Letture'}</div>
+        <div style="color: var(--text-secondary-color);">(demo) 1ª lettura / Salmo / 2ª lettura</div>
+      </div>
+
+      <div style="border-top:1px solid var(--border-color); padding-top:0.75rem;">
+        <div style="font-weight:900; color: var(--text-secondary-color); margin-bottom:0.4rem;">${lang==='en'?'Gospel':'Vangelo'}</div>
+        <div style="color: var(--text-secondary-color);">(demo) Vangelo del giorno</div>
+
+        <div style="margin-top:0.7rem;">
+          <div style="font-weight:900; color: var(--primary-color); margin-bottom:0.2rem;">${lang==='en'?'Youth comment':'Commento giovani (Vangelo)'}</div>
+          <div style="color: var(--text-secondary-color);">(demo) Spiegazione per giovani collegata al Vangelo</div>
+        </div>
+
+        <div style="margin-top:0.7rem;">
+          <div style="font-weight:900; color: var(--primary-color); margin-bottom:0.2rem;">${lang==='en'?'Youth comment':'Commento giovani (Letture)'}</div>
+          <div style="color: var(--text-secondary-color);">(demo) Spiegazione per giovani collegata alle letture</div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  return section;
+}
+
+function initCheckboxes(){
+  const container = document.getElementById('rite-checkboxes');
+  container.innerHTML = '';
+  const lang = localStorage.getItem('language') || 'it';
+
+  RITES.forEach((r, idx)=>{
+    const line = document.createElement('label');
+    line.style.display='flex';
+    line.style.gap='0.6rem';
+    line.style.alignItems='center';
+    line.style.fontWeight='900';
+    line.style.color='var(--text-secondary-color)';
+
+    const cb = document.createElement('input');
+    cb.type='checkbox';
+    cb.value=r.key;
+    cb.checked = idx===0; // default primo
+
+    const text = document.createElement('span');
+    text.textContent = lang==='en'?r.label_en:r.label_it;
+
+    line.append(cb, text);
+    container.appendChild(line);
+  });
+}
+
+function getSelectedRites(){
+  return Array.from(document.querySelectorAll('#rite-checkboxes input[type="checkbox"]:checked')).map(x=>x.value);
+}
+
+function load(){
+  const dateInput = document.getElementById('date-input');
+  const dateIso = dateInput.value;
+  const results = document.getElementById('day-results');
+
+  results.innerHTML = '';
+  const selectedRites = getSelectedRites();
+
+  if(!dateIso){
+    results.innerHTML = '<p style="color:var(--text-secondary-color)">Seleziona una data.</p>';
+    return;
+  }
+
+  selectedRites.forEach(riteKey=>{
+    const colorKey = getPseudoColorForDate(dateIso);
+    results.appendChild(renderResultCard({ritoKey: riteKey, dateIso, colorKey}));
+  });
+}
+
+function init(){
+  const dateInput = document.getElementById('date-input');
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth()+1).padStart(2,'0');
+  const dd = String(now.getDate()).padStart(2,'0');
+  dateInput.value = `${yyyy}-${mm}-${dd}`;
+
+  initCheckboxes();
+
+  document.getElementById('btn-load').addEventListener('click', load);
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
+
